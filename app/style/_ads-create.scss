@@ -1,0 +1,16 @@
+.ads{
+  &__page-title{
+    margin: 20px 0;
+  }
+  &__section{
+    display: flex;
+    margin: 50px 0;
+  }
+  &__section-name{
+    width: 150px;
+    margin-right: 50px;
+  }
+  &__section-container{
+    width: 100%;
+  }
+}
