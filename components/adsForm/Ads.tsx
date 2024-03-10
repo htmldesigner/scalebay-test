@@ -1,6 +1,6 @@
 'use client'
 import { Button, Form } from 'antd'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useAppDispatch } from '@/libs/store/hooks'
 import { addAds, loadData, updateAds } from '@/libs/store/slices/adsSlice/adsSlice'
 import AdsSelectCategory from '@/components/adsForm/AdsSelectCategory'
@@ -12,6 +12,7 @@ import { useSession } from 'next-auth/react'
 import { useRouter } from 'next/navigation'
 import { IItem } from '@/types/IItem'
 import AdsType from '@/components/adsForm/AdsType'
+import dayjs from 'dayjs'
 
 interface IAdsItemProps {
   item: IItem | null
@@ -39,6 +40,7 @@ export default function Ads({ item, actionType }: IAdsItemProps) {
   }
 
   const [form] = Form.useForm()
+
   return (
     <React.Fragment>
       <div className='ads__page-title'>
@@ -51,7 +53,7 @@ export default function Ads({ item, actionType }: IAdsItemProps) {
         layout='vertical'
         autoComplete='off'
         onFinish={handleSubmit}
-        initialValues={item ? { ...item } : { currency: 'RUB', type: 1, status: 1 }}
+        initialValues={item ? { ...item } : { currency: 'RUB', type: 1, status: 1, time: dayjs(), startTime: '' }} // startTime по умолчанию не выбран
       >
         {AdsType()}
 
@@ -59,7 +61,7 @@ export default function Ads({ item, actionType }: IAdsItemProps) {
 
         {AdsDescription()}
 
-        {AdsSettings()}
+        {AdsSettings({ form })}
 
         {AdsPrice()}
 

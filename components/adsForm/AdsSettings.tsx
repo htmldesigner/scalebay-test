@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
-import { Checkbox, DatePicker, type DatePickerProps, Flex, Form, Input, Radio, RadioChangeEvent } from 'antd'
+import React, { useEffect, useState } from 'react'
+import { Checkbox, DatePicker, Flex, Form, FormInstance, Input, InputNumber, Radio, RadioChangeEvent } from 'antd'
 import locale from 'antd/es/date-picker/locale/ru_RU'
-import dayjs from 'dayjs'
 import { useAppSelector } from '@/libs/store/hooks'
 
-export default function AdsSettings() {
+interface IAdsSettingsProps {
+  form: FormInstance
+}
+
+export default function AdsSettings({ form }: IAdsSettingsProps) {
   const currentAdsType = useAppSelector(state => state.adsSlice.currentAdsType)
-  const [startTime, setStartTime] = useState<Number>(1)
+  const [startTime, setStartTime] = useState<Number>(0)
+
   const startTimeOptions = [
     { label: 'Сейчас', value: 1 },
     { label: 'Выбрать', value: 2 },
@@ -16,22 +20,21 @@ export default function AdsSettings() {
     setStartTime(e.target.value)
   }
 
-  const timeChange: DatePickerProps['onChange'] = (_, dateStr) => {
-    console.log('onChange:', dateStr)
-  }
+  useEffect(() => {
+    setStartTime(form.getFieldValue('startTime'))
+  }, [])
 
   const showDataPicker = () => {
-    if (startTime !== 1) {
-      return (
-        <Form.Item
-          name='time'
-          label='Выбрать время начала'
-          rules={[{ required: true, message: 'Выбрать время начала' }]}
-        >
-          <DatePicker locale={locale} showTime defaultValue={dayjs('2024-01-01', 'YYYY-MM-DD')} onChange={timeChange} />
-        </Form.Item>
-      )
-    }
+    return (
+      <Form.Item
+        name='time'
+        label='Выбрать время начала'
+        rules={[{ required: true, message: 'Выбрать время начала' }]}
+        hidden={startTime !== 2}
+      >
+        <DatePicker locale={locale} showTime />
+      </Form.Item>
+    )
   }
 
   return (
@@ -47,16 +50,15 @@ export default function AdsSettings() {
               <Input placeholder='Артикул' style={{ width: 150 }} />
             </Form.Item>
             <Form.Item
-              name='starTime'
+              name='startTime'
               label='Время начала торгов'
               rules={[{ required: true, message: 'Указать начала торгов' }]}
             >
               <Radio.Group
                 options={startTimeOptions}
                 buttonStyle='solid'
-                onChange={timeSelectChange}
-                value={startTime}
                 optionType='button'
+                onChange={timeSelectChange}
               />
             </Form.Item>
             {showDataPicker()}
@@ -73,7 +75,7 @@ export default function AdsSettings() {
                 label='Дней до поступления'
                 rules={[{ required: true, message: 'Необходимо заполнить' }]}
               >
-                <Input placeholder='Артикул' style={{ width: 150 }} />
+                <InputNumber placeholder='Дней до поступления' style={{ width: 150 }} />
               </Form.Item>
 
               <Form.Item name='autoDetect' valuePropName='checked'>
@@ -85,7 +87,7 @@ export default function AdsSettings() {
                 label='Количество повторов'
                 rules={[{ required: true, message: 'Необходимо заполнить' }]}
               >
-                <Input placeholder='Артикул' style={{ width: 150 }} />
+                <InputNumber placeholder='Количество повторов' style={{ width: 150 }} />
               </Form.Item>
             </Flex>
           ) : (

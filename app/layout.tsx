@@ -1,6 +1,6 @@
 import type { Metadata } from 'next'
 import { PT_Sans } from 'next/font/google'
-import './style/style.scss'
+import '@/style/style.scss'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import React from 'react'
