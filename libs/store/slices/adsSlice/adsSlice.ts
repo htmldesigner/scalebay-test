@@ -10,12 +10,11 @@ export const adsSlice = createSlice({
   initialState: {
     adsData: {} as IData,
     currentAdsType: 1,
-    publishedAds: [] as IItem[],
+    publishedAds: [...mock] as IItem[],
   },
   reducers: {
     loadData: state => {
       state.adsData = data as IData
-      state.publishedAds = mock as IItem[]
     },
     addAds: (state, action) => {
       state.publishedAds.push(action.payload)

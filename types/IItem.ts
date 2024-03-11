@@ -31,6 +31,7 @@ export interface IItem {
       thumbUrl: string
     },
   ]
+  time: Date | string
   count: string
   startTime: number
   productToOrder: boolean

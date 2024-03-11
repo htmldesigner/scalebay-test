@@ -14,5 +14,5 @@ export default function ProfileAds() {
       return el.userId === session.data?.user.id
     })
   }
-  return <AdsList list={list} />
+  return <AdsList list={list} edit={true} />
 }

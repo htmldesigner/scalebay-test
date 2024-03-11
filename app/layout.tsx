@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { PT_Sans } from 'next/font/google'
+import { Roboto } from 'next/font/google'
 import '@/style/style.scss'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
@@ -7,7 +7,7 @@ import React from 'react'
 import '@/types/ext-auth-extensions'
 import { Providers } from '@/components/Providers'
 
-const pt_sans = PT_Sans({
+const pt_sans = Roboto({
   weight: '400',
   subsets: ['latin'],
 })

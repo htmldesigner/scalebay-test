@@ -1,6 +1,6 @@
 'use client'
 import { Button, Form } from 'antd'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useAppDispatch } from '@/libs/store/hooks'
 import { addAds, loadData, updateAds } from '@/libs/store/slices/adsSlice/adsSlice'
 import AdsSelectCategory from '@/components/adsForm/AdsSelectCategory'

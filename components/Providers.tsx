@@ -7,16 +7,17 @@ import { ConfigProvider } from 'antd'
 
 export const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
-    <SessionProvider>
-      <ConfigProvider
-        theme={{
-          token: {
-            borderRadius: 0,
-          },
-        }}
-      >
+    <ConfigProvider
+      theme={{
+        token: {
+          fontSize: 16,
+          borderRadius: 0,
+        },
+      }}
+    >
+      <SessionProvider>
         <StoreProvider>{children}</StoreProvider>
-      </ConfigProvider>
-    </SessionProvider>
+      </SessionProvider>
+    </ConfigProvider>
   )
 }
