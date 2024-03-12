@@ -40,17 +40,6 @@ export const selectAllCategory = (state: RootState) => {
   return result
 }
 
-// export const selectAllCategory = createSelector(
-//   (state: RootState) => state.adsSlice.adsData.category,
-//   category => {
-//     let result: { label: string; value: number }[] = []
-//     category?.forEach((el: ICategory) => {
-//       result.push(...el.options.map(e => ({ label: e.name, value: e.id })))
-//     })
-//     return result
-//   },
-// )
-
 export const selectScale = createSelector(
   (state: RootState) => state.adsSlice.adsData.scale,
   scale => scale?.map((e: IScale) => ({ label: e.value, value: e.id })),
